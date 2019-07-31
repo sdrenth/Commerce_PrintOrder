@@ -100,6 +100,8 @@ class PrintOrderPage extends Page
         if ($module && $module->getProperty('system_settings')) {
             $settings = array_map('trim', explode(',', $module->getProperty('system_settings')));
             if (count($settings) > 0) {
+                $this->commerce->setWorkingContext($order->get('context'));
+                
                 foreach ($settings as $key) {
                     $data['config'][$key] = $this->adapter->getOption($key);
                 }
